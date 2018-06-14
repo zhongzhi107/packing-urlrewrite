@@ -44,6 +44,18 @@ app.use(urlrewrite(rules));
 ```
 
 ```javascript
+// /rewriteRules.cfg 文件内容必须符合JSON格式，但可以加注释
+{
+  // 1.用json模拟数据，标示符为 `require!`
+  "^/api/(.*)": "require!/mock/api/$1.js",
+  // 2.同域转发
+  "^/$": "/index.html",
+  // 3.跨域转发
+  "^/test/(.*)": "http://test.xxx.com/test/$1",
+}
+```
+
+```javascript
 // /mock/api/$1.js
 export default (req, res) => {
   // maybe get parameters from request
