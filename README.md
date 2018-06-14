@@ -11,7 +11,7 @@ npm install packing-urlrewrite --save-dev
 
 ## 使用
 
-### 使用静态配置(静态和热法配置二选一)
+### 使用静态配置(静态和热发配置二选一)
 
 ```javascript
 import Express from 'express';
