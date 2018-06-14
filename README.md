@@ -29,6 +29,19 @@ const app = new Express();
 app.use(urlrewrite(rules));
 ```
 
+
+```javascript
+// /mock/api/$1.js
+export default (req, res) => {
+  // maybe get parameters from request
+  const data = {
+    name: 'Joe'
+  };
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(data));
+};
+```
+
 ### 使用热发配置
 
 ```javascript
@@ -44,7 +57,7 @@ app.use(urlrewrite(rules));
 ```
 
 ```javascript
-// /rewriteRules.cfg 文件内容必须符合JSON格式，但可以加注释
+// rewriteRules.cfg 文件内容必须符合JSON格式，但可以加注释
 {
   // 1.用json模拟数据，标示符为 `require!`
   "^/api/(.*)": "require!/mock/api/$1.js",
@@ -55,15 +68,4 @@ app.use(urlrewrite(rules));
 }
 ```
 
-```javascript
-// /mock/api/$1.js
-export default (req, res) => {
-  // maybe get parameters from request
-  const data = {
-    name: 'Joe'
-  };
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(data));
-};
-```
 
