@@ -33,7 +33,7 @@ function dispatcher(req, res, next) {
           target: targetUrl.protocol + '//' + targetUrl.host,
           changeOrigin: true
         }, function (e) {
-           // 连接服务器错误
+          // 连接服务器错误
           res.writeHead(502, { 'Content-Type': 'text/html' });
           res.end(e.toString());
         });
@@ -65,13 +65,14 @@ function loadRules(path) {
 
 function rewrite(rewriteTable) {
   var rules = [];
+  var st;
   var rulesHotFile = rewriteTable.rulesHotFile;
   if (rulesHotFile) {
     rules = loadRules(rulesHotFile);
     fs.watchFile(rulesHotFile, function (curr, prev) {
       console.log('rewriteRules changed.');
       clearTimeout(st);
-      var st = setTimeout(function() {
+      st = setTimeout(function() {
         if (curr.mtime > prev.mtime) {
           console.log('reload rewriteRules...');
           rules = loadRules(rulesHotFile);
